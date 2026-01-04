@@ -1,0 +1,37 @@
+name: 'Test and Build'
+description: 'Run tests, type checking, and build Docker image'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      shell: bash
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+      shell: bash
+    
+    - name: Install dependencies
+      run: npm ci
+      shell: bash
+    
+    - name: Run type checking and build
+      run: npm run build
+      shell: bash
+    
+    - name: Build Docker image
+      run: docker build -t profile:${{ github.sha }} .
+      shell: bash
+    
+    - name: Run container smoke test
+      run: |
+        docker run -d -p 3000:80 --name test profile:${{ github.sha }}
+        sleep 5
+        curl -f http://localhost:3000 || exit 1
+        docker stop test
+        docker rm test
+      shell: bash
