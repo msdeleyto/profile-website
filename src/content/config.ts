@@ -6,7 +6,7 @@ const blogCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.date(),
-    author: z.string().default('Your Name'),
+    author: z.string().default('Miguel Sánchez'),
     tags: z.array(z.string()).default([]),
   }),
 });

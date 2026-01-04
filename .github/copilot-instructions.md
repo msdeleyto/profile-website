@@ -51,7 +51,7 @@ npm run preview    # Preview production build locally
 
 ### Update Personal Branding
 1. **Name & Links**: Update in `src/components/Header.astro` (logo text) and `src/components/Footer.astro` (social links)
-2. **Bio & Skills**: Edit `src/pages/index.astro` - hero section, skills lists, contact email
+2. **Bio & Skills**: Edit `src/pages/index.astro` - hero section, skills lists, linkedin
 3. **Site metadata**: Change `site` URL in `astro.config.mjs` for production domain
 4. **Colors**: Modify `tailwind.config.mjs` theme to customize blue accent colors (currently `blue-600/400`)
 5. **Favicon**: Replace `public/favicon.svg` with your own logo
