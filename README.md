@@ -18,12 +18,6 @@ Single-page portfolio built with **Astro**, TypeScript, and Tailwind CSS. Minima
 - Skills (categorized tech stack)
 - Projects (with links)
 
-**Key Features:**
-- Visual scroll navigation with fixed indicator dots
-- Fade-in animations on scroll via Intersection Observer
-- Event delegation pattern for all interactions
-- TypeScript-based content (no CMS, no markdown)
-
 ## Development
 
 ```bash
