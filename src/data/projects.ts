@@ -21,7 +21,7 @@ export const projects: Project[] = [
     description: "This personal profile website showcasing my experience and projects.",
     technologies: ["Astro", "TypeScript", "Tailwind CSS", "GH Actions"],
     link: "https://msdeleyto.es",
-    github: "https://github.com/ironwithout/profile",
+    github: "https://github.com/ironwithout/profile-website",
   },
   {
     title: "Profile website infrastructure",
