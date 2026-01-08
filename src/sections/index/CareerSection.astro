@@ -18,9 +18,19 @@ const { sectionIndex } = Astro.props;
       Career
     </Text>
     <div class="mt-6 relative">
-      <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-tech-border transform -translate-x-1/2"></div>
+      <!-- Timeline line with gradient effect -->
+      <div class="absolute left-1/2 top-0 bottom-0 w-px transform -translate-x-1/2">
+        <div class="h-full bg-gradient-to-b from-accent-primary via-tech-border to-tech-border opacity-40"></div>
+      </div>
       {experiences.map((exp, index) => (
         <div class={`relative mb-12 flex ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+          <!-- Timeline dot -->
+          <div class="absolute left-1/2 top-6 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <div 
+              class={`timeline-dot w-3 h-3 rounded-full border-2 bg-tech-surface border-tech-border transition-all duration-300 ${index === 0 ? 'dot-active' : ''}`}
+              data-timeline-dot={`experience-${index}`}
+            ></div>
+          </div>
           <div class={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
             <ExperienceCard 
               {...exp}

@@ -17,7 +17,7 @@ const { title, description, technologies, link, github } = Astro.props;
 <div class="tech-card">
   <Text variant="h3">{title}</Text>
   <Text variant="body" class="mt-2 mb-4">{description}</Text>
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     {technologies.map(tech => (
         <Tag>{tech}</Tag>
       ))}

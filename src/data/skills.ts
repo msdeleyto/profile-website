@@ -2,7 +2,8 @@
  * Skills organized by category
  */
 export const skills = {
-  Frontend: ["React", "TypeScript", "Vue.js", "Astro", "Tailwind CSS", "Next.js"],
-  Backend: ["Node.js", "Python", "Django", "Express", "PostgreSQL", "MongoDB", "Redis"],
-  "DevOps & Cloud": ["AWS", "GCP", "Docker", "Kubernetes", "Jenkins", "CI/CD"],
+  Languages: ["Java/Kotlin", "Ruby", "Python", "Shell Scripting"],
+  Databases: ["MysQL", "InfluxDB"],
+  "DevOps & Cloud": ["AWS", "Docker", "Kubernetes", "Helm", "Jenkins", "GH Actions", "ArgoCD", "Terraform", "Ansible"],
+  Tools: ["Git", "Copilot", "VSCode", "IntelliJ IDEA"],
 };

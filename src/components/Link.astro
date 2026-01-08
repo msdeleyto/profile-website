@@ -12,7 +12,9 @@ const { href } = Astro.props;
 
 <a 
   href={href} 
-  class={`tech-link-arrow`}
+  class="tech-link-arrow"
+  target="_blank"
+  rel="noopener noreferrer"
 >
   <slot />
 </a>

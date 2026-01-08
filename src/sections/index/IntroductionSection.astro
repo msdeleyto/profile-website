@@ -2,6 +2,7 @@
 import PageSection from '../../components/PageSection.astro';
 import Section from '../../components/Section.astro';
 import Text from '../../components/Text.astro';
+import Link from '../../components/Link.astro';
 import { introduction } from '../../data/introduction';
 
 interface Props {
@@ -20,6 +21,10 @@ const { sectionIndex } = Astro.props;
       <Text variant="body" class="max-w-3xl">
         {introduction.description}
       </Text>
+    </div>
+    <div class="flex gap-6 mt-6">
+      <Link href={introduction.social.github}>GitHub</Link>
+      <Link href={introduction.social.linkedin}>LinkedIn</Link>
     </div>
   </Section>
 </PageSection>

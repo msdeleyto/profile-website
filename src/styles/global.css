@@ -27,6 +27,21 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Timeline dot animations */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 12px theme('colors.accent.primary'), 0 0 24px theme('colors.accent.primary');
+    }
+    50% {
+      box-shadow: 0 0 20px theme('colors.accent.primary'), 0 0 32px theme('colors.accent.primary');
+    }
+  }
+
+  .timeline-dot.dot-active {
+    @apply scale-150 bg-accent-primary border-accent-primary shadow-xl shadow-accent-primary/60;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
 }
 
 /* Tech Design System - Minimalistic & High Contrast */
@@ -42,10 +57,6 @@
   }
 
   /* Links */
-  .tech-link {
-    @apply text-text-muted hover:text-accent-primary transition-colors;
-  }
-  
   .tech-link-arrow {
     @apply text-text-muted hover:text-accent-primary transition-colors;
   }
@@ -70,14 +81,5 @@
   /* Text Variants */
   .tech-text {
     @apply text-text-secondary leading-relaxed;
-  }
-
-  /* Status indicators */
-  .status-active {
-    @apply text-accent-success;
-  }
-  
-  .status-inactive {
-    @apply text-accent-secondary;
   }
 }
