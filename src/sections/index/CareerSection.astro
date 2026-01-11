@@ -14,11 +14,12 @@ const { sectionIndex } = Astro.props;
 
 <PageSection sectionIndex={sectionIndex}>
   <Section>
-    <Text variant="h2">
-      Career
-    </Text>
-    <div class="mt-6 relative">
-      <!-- Timeline line with gradient effect -->
+    <div class="py-12">
+      <Text variant="h2">
+        Career
+      </Text>
+      <div class="mt-6 relative">
+        <!-- Timeline line with gradient effect -->
       <div class="absolute left-1/2 top-0 bottom-0 w-px transform -translate-x-1/2">
         <div class="h-full bg-gradient-to-b from-accent-primary via-tech-border to-tech-border opacity-40"></div>
       </div>
@@ -39,6 +40,7 @@ const { sectionIndex } = Astro.props;
           </div>
         </div>
       ))}
+      </div>
     </div>
   </Section>
 </PageSection>
