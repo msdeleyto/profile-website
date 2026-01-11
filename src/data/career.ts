@@ -15,11 +15,11 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: "XING",
-    role: "Senior DevOps Engineer",
+    role: "DevOps Engineer",
     period: "2023 → Present",
     location: "Remote",
     status: "current",
-    description: "Senior DevOps Engineer in a cross-functional platform team, designing and operating cloud-native infrastructure and CI/CD systems for large-scale applications, with a focus on automation, reliability, and cost efficiency.",
+    description: "DevOps Engineer in a cross-functional platform team, designing and operating cloud-native infrastructure and CI/CD systems for large-scale applications, with a focus on automation, reliability, and cost efficiency.",
     achievements: [
       "Reduced total CI build minutes by 36% year on year",
       "Test feedback time by 33%",
