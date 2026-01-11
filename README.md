@@ -55,3 +55,71 @@ All content lives in TypeScript files (`src/data/`). To update content, edit the
 - CSS custom properties in `global.css`
 - Tailwind tokens in `tailwind.config.mjs`
 - Semantic color palette: `tech-*`, `accent-*`, `text-*`
+
+## AWS OIDC Configuration (Deployment)
+
+To securely push Docker images to Amazon ECR via GitHub Actions without long-lived credentials, configure AWS OIDC:
+
+### 1. Create OIDC Provider
+Create an IAM OIDC provider for GitHub:
+- **Provider URL**: `https://token.actions.githubusercontent.com`
+- **Audience**: `sts.amazonaws.com`
+
+### 2. Create IAM Role with Trust Policy
+Create a role (e.g., `GitHubAction-ECR-Push`) with this trust relationship:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::<AWS_ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringLike": {
+                    "token.actions.githubusercontent.com:sub": "repo:<GITHUB_USERNAME>/<REPO_NAME>:main"
+                },
+                "StringEquals": {
+                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                }
+            }
+        }
+    ]
+}
+```
+
+### 3. Attach ECR Permissions Policy
+Attach a policy to the role allowing ECR push access:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:CompleteLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:InitiateLayerUpload",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:BatchGetImage"
+            ],
+            "Resource": "<ECR_REPOSITORY_ARN>"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "ecr:GetAuthorizationToken",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+### 4. Configure GitHub Repository Secrets
+Add the following secrets to your GitHub repository:
+- `AWS_ROLE_ARN`: The ARN of the role created in step 2.
+- `AWS_REGION`: Your target AWS region (e.g., `us-east-1`).

@@ -1,5 +1,5 @@
-name: 'Test and Build'
-description: 'Run tests, type checking, and build Docker image'
+name: 'Build and Test Action'
+description: 'A GitHub Action to run tests, type checking, and build a Docker image'
 
 runs:
   using: 'composite'
