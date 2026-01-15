@@ -48,5 +48,7 @@ jobs:
           REPOSITORY: web/profile
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --tag $REGISTRY/$REPOSITORY:$IMAGE_TAG \
+            --push .
