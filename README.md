@@ -66,7 +66,7 @@ Create an IAM OIDC provider for GitHub:
 - **Audience**: `sts.amazonaws.com`
 
 ### 2. Create IAM Role with Trust Policy
-Create a role (e.g., `GitHubAction-ECR-Push`) with this trust relationship:
+Create a role (e.g., `GitHubActionECRPush`) with this trust relationship:
 
 ```json
 {
@@ -79,11 +79,9 @@ Create a role (e.g., `GitHubAction-ECR-Push`) with this trust relationship:
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
-                "StringLike": {
-                    "token.actions.githubusercontent.com:sub": "repo:<GITHUB_USERNAME>/<REPO_NAME>:ref:refs/heads/main"
-                },
                 "StringEquals": {
-                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+                    "token.actions.githubusercontent.com:sub": "repo:<OWNER>/<REPO>:environment:production"
                 }
             }
         }
