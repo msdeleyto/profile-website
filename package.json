@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && npm run postbuild",
+    "postbuild": "mv dist/error/index.html dist/error.html",
     "preview": "astro preview",
     "astro": "astro"
   },
