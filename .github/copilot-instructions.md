@@ -1,7 +1,7 @@
 # Copilot Instructions for Profile Website
 
 ## Project Overview
-Single-page portfolio built with **Astro 4.0**, TypeScript, and Tailwind CSS. Minimal JavaScript, snap-scroll sections, Docker deployment ready.
+Single-page portfolio built with **Astro 4.0**, TypeScript, and Tailwind CSS. Minimal JavaScript, snap-scroll sections, static deployment ready.
 
 **⚠️ Security**: This is public. Never commit secrets. Use `.env` (gitignored) and GitHub Secrets for CI/CD.
 
@@ -101,16 +101,13 @@ colors: {
 
 ```bash
 npm run dev      # localhost:4321
-npm run build    # Runs astro check (type safety) + build
+npm run build    # Runs astro check (type safety) + build static files
 npm run preview  # Test prod build locally
 ```
 
 **Type Checking**: `astro check` runs on build. Fix all errors before committing.
 
-**Docker**:
-```bash
-docker-compose up --build  # Port 3000
-```
+**Build Output**: Static files generated in `dist/` folder ready for deployment.
 
 ## Common Patterns
 
@@ -155,9 +152,9 @@ max-height: 1000px;
 - `location` in Experience is required but displays conditionally (historical)
 
 ## CI/CD
-- **PR Checks**: Type check + Docker build + smoke test
-- **Deploy**: Pushes to AWS ECR on merge to `main`
-- **Secrets needed**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
+- **PR Checks**: Type check + security audit + build verification + artifact upload
+- **Main Branch**: Build static website and create production artifacts
+- **Security**: `npm audit` runs on all builds to detect vulnerabilities
 
 ## File You Might See But Shouldn't Use
 - `src/components/TechSection.astro` - **Unused duplicate**, ignore it
@@ -169,8 +166,7 @@ max-height: 1000px;
 - Extends Astro strict preset
 - No custom overrides needed for typical changes
 
-## Docker Optimization Notes
-- `.dockerignore` excludes `node_modules`, `dist`, logs to reduce context size
+## Best Practices
 - **TypeScript**: Always define interfaces for component props (required for Astro type checking)
 - **Props destructuring**: Destructure `Astro.props` immediately in frontmatter with defaults
 - **Conditional rendering**: Use optional chaining: `{link && <a href={link}>...`

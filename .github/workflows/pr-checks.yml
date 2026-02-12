@@ -5,12 +5,12 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build-and-scan:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and Test
-        uses: ./.github/actions/build-and-test
+      - name: Build and Scan
+        uses: ./.github/actions/build-and-scan

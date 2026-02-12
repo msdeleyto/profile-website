@@ -1,13 +1,12 @@
 # Profile Website
 
-Single-page portfolio built with **Astro**, TypeScript, and Tailwind CSS. Minimal JavaScript, snap-scroll sections, Docker deployment ready.
+Single-page portfolio built with **Astro**, TypeScript, and Tailwind CSS. Minimal JavaScript, snap-scroll sections, static deployment ready.
 
 ## Technology Stack
 
 - **Astro** - Static site generator with minimal JavaScript
 - **TypeScript** - Type-safe component development
 - **Tailwind CSS** - Utility-first styling with custom tech theme
-- **Docker** - Containerized deployment with Nginx
 - **Event Delegation** - CSP-compliant interaction patterns
 
 ## Architecture
@@ -27,23 +26,20 @@ npm install
 # Start dev server (localhost:4321)
 npm run dev
 
-# Type check + build
+# Type check + build static files
 npm run build
 
 # Preview production build
 npm run preview
 ```
 
-## Docker
+## Deployment
 
-```bash
-# Build and run (port 3000)
-docker-compose up --build
+The build process generates static files in the `dist/` folder:
+- `index.html` - Main page
+- `error.html` - Error page
 
-# Manual build
-docker build -t profile .
-docker run -p 3000:80 profile
-```
+Deploy the `dist/` folder to any static hosting service (Netlify, Vercel, Cloudflare Pages, AWS S3, etc.).
 
 ## Content Management
 
@@ -56,68 +52,10 @@ All content lives in TypeScript files (`src/data/`). To update content, edit the
 - Tailwind tokens in `tailwind.config.mjs`
 - Semantic color palette: `tech-*`, `accent-*`, `text-*`
 
-## AWS OIDC Configuration (Deployment)
+## CI/CD
 
-To securely push Docker images to Amazon ECR via GitHub Actions without long-lived credentials, configure AWS OIDC:
+GitHub Actions workflows automatically:
+- **PR Checks**: Type checking, security audit, build verification, and artifact upload
+- **Main Branch**: Build static website and create production artifacts
 
-### 1. Create OIDC Provider
-Create an IAM OIDC provider for GitHub:
-- **Provider URL**: `https://token.actions.githubusercontent.com`
-- **Audience**: `sts.amazonaws.com`
-
-### 2. Create IAM Role with Trust Policy
-Create a role (e.g., `GitHubActionECRPush`) with this trust relationship:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Federated": "arn:aws:iam::<AWS_ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
-            },
-            "Action": "sts:AssumeRoleWithWebIdentity",
-            "Condition": {
-                "StringEquals": {
-                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-                    "token.actions.githubusercontent.com:sub": "repo:<OWNER>/<REPO>:environment:production"
-                }
-            }
-        }
-    ]
-}
-```
-
-### 3. Attach ECR Permissions Policy
-Attach a policy to the role allowing ECR push access:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ecr:CompleteLayerUpload",
-                "ecr:UploadLayerPart",
-                "ecr:InitiateLayerUpload",
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:PutImage",
-                "ecr:BatchGetImage"
-            ],
-            "Resource": "<ECR_REPOSITORY_ARN>"
-        },
-        {
-            "Effect": "Allow",
-            "Action": "ecr:GetAuthorizationToken",
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-### 4. Configure GitHub Repository Secrets
-Add the following secrets to your GitHub repository:
-- `AWS_ROLE_ARN`: The ARN of the role created in step 2.
-- `AWS_REGION`: Your target AWS region (e.g., `us-east-1`).
+All builds include `npm audit` for vulnerability scanning.
