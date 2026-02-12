@@ -16,7 +16,7 @@ export const experiences: Experience[] = [
   {
     company: "XING",
     role: "DevOps Engineer",
-    period: "2023 → Present",
+    period: "2023 → 2026",
     location: "Remote",
     status: "current",
     description: "DevOps Engineer in a cross-functional platform team, designing and operating cloud-native infrastructure and CI/CD systems for large-scale applications, with a focus on automation, reliability, and cost efficiency.",
@@ -35,7 +35,7 @@ export const experiences: Experience[] = [
     period: "2020 → 2023",
     location: "Hybrid",
     status: "completed",
-    description: "Product feature development and platform improvements for XING's Android app, a professional networking platform.",
+    description: "Senior Android Engineer responsible for developing and maintaining mobile applications, collaborating with cross-functional teams to deliver high-quality software solutions.",
     achievements: [
       "Solid collaboration with backend, iOS, and frontend teams to deliver valuable product features",
       "Increased test coverage significantly to improve product quality through relevant tests",

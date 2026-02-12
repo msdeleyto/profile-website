@@ -39,7 +39,7 @@ const cardId = `experience-${index}`;
     class="w-full text-left cursor-pointer"
     data-experience-toggle={cardId}
     type="button"
-    aria-expanded={index === 0 ? "true" : "false"}
+    aria-expanded="false"
     aria-controls={cardId}
   >
     <div class="flex items-start justify-between gap-4">
@@ -58,7 +58,7 @@ const cardId = `experience-${index}`;
         </div>
       </div>
       <svg 
-        class={`expand-icon w-5 h-5 text-accent-primary transition-transform flex-shrink-0 mt-1 ${index === 0 ? 'rotate-90' : ''}`}
+        class="expand-icon w-5 h-5 text-accent-primary transition-transform flex-shrink-0 mt-1"
         fill="none" 
         stroke="currentColor" 
         viewBox="0 0 24 24"
@@ -66,16 +66,17 @@ const cardId = `experience-${index}`;
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
       </svg>
     </div>
-  </button>
-
-  <!-- Expandable Content -->
-  <div id={cardId} class={`expandable-content ${index === 0 ? 'expanded' : ''}`}>
-    <div class="pt-4 border-t border-tech-border space-y-4">
-      <!-- Description -->
+    <!-- Description - aligned with card content -->
+    <div class="mt-3 ml-6">
       <Text variant="body">
         {description}
       </Text>
+    </div>
+  </button>
 
+  <!-- Expandable Content -->
+  <div id={cardId} class="expandable-content">
+    <div class="pt-4 border-t border-tech-border space-y-4">
       <!-- Achievements -->
       {achievements && achievements.length > 0 && (
         <div class="space-y-2">
