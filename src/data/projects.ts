@@ -11,10 +11,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "k8s homelab",
-    description: "Personal Kubernetes homelab setup with self-hosted services and monitoring.",
-    technologies: ["ArgoCD", "Kubernetes", "Grafana", "Prometheus", "Helm", "GH Actions"],
-    github: "https://github.com/home-kops/k8s-homelab",
+    title: "Homelab Infrastructure",
+    description: "A Kubernetes-based homelab infrastructure for learning and experimentation.",
+    technologies: ["Ansible", "Terraform", "GH Actions"],
+    github: "https://github.com/msdeleyto/homelab-infra",
+  },
+  {
+    title: "Homelab Services",
+    description: "ArgoCD setup for managing homelab services.",
+    technologies: ["Kubernetes", "ArgoCD", "Observability", "HashiCorp Vault", "GH Actions"],
+    github: "https://github.com/msdeleyto/homelab-manifests",
   },
   {
     title: "Profile Website",
